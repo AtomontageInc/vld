@@ -8,7 +8,7 @@
 #include <tchar.h>
 #include <sstream>
 #include <algorithm>
-
+#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
 #include <gtest/gtest.h>
 
 // Name of the debug C Runtime Library DLL on this system
@@ -31,7 +31,7 @@
 #define CRTDLLNAME   _T("msvcr110d.dll")
 #elif _MSC_VER == 1800	// VS 2013
 #define CRTDLLNAME   _T("msvcr120d.dll")
-#elif _MSC_VER == 1900	// VS 2015
+#elif _MSC_VER >= 1900	// VS 2015
 #define CRTDLLNAME   _T("ucrtbased.dll")
 #else
 #error Unsupported compiler
@@ -55,7 +55,7 @@
 #define CRTDLLNAME   _T("msvcr110.dll")
 #elif _MSC_VER == 1800	// VS 2013
 #define CRTDLLNAME   _T("msvcr120.dll")
-#elif _MSC_VER == 1900	// VS 2015
+#elif _MSC_VER >= 1900	// VS 2015
 #define CRTDLLNAME   _T("ucrtbase.dll")
 #else
 #error Unsupported compiler

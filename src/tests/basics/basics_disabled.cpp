@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "vld.h"
 #include "Allocs.h"
-
+#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
 #include <gtest/gtest.h>
 
 class TestBasicsDisabled : public ::testing::Test

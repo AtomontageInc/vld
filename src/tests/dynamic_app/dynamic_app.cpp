@@ -5,7 +5,7 @@
 #include "LoadTests.h"
 #include "ThreadTests.h"
 #include "vld.h"
-
+#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
 #include <gtest/gtest.h>
 
 // Leaks 6 memory allocations

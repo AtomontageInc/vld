@@ -5,7 +5,7 @@
 #include "Tests.h"
 // This hooks vld into this app
 #include "vld.h"
-
+#define _SILENCE_TR1_NAMESPACE_DEPRECATION_WARNING
 #include <gtest/gtest.h>
 
 enum CorruptionType

@@ -714,23 +714,27 @@ VOID Print (LPWSTR messagew)
                 fputws(messagew, stdout);
         }
         else {
-            const size_t MAXMESSAGELENGTH = 5119;
             size_t  count = 0;
-            CHAR    messagea [MAXMESSAGELENGTH + 1];
-            if (wcstombs_s(&count, messagea, MAXMESSAGELENGTH + 1, messagew, _TRUNCATE) != 0) {
-                // Failed to convert the Unicode message to ASCII.
-                assert(FALSE);
-                return;
-            }
-            messagea[MAXMESSAGELENGTH] = '\0';
+            if (wcstombs_s(&count, NULL, 0, messagew, _TRUNCATE) == 0)
+            {
+                CHAR* messagea = (CHAR*)malloc(sizeof(CHAR) * count);
+                if (messagea != NULL)
+                {
+                    if (wcstombs_s(NULL, messagea, count, messagew, _TRUNCATE) == 0)
+                    {
+                        if (s_reportFile != NULL)
+                        {
+                            // Send the report to the previously specified file.
+                            fwrite(messagea, sizeof(CHAR), strlen(messagea), s_reportFile);
+                        }
 
-            if (s_reportFile != NULL) {
-                // Send the report to the previously specified file.
-                fwrite(messagea, sizeof(CHAR), strlen(messagea), s_reportFile);
-            }
+                        if (s_reportToStdOut)
+                            fputs(messagea, stdout);
+                    }
 
-            if ( s_reportToStdOut )
-                fputs(messagea, stdout);
+                    free((void*)messagea);
+                }
+            }
 		}
 
 		if (s_reportToDebugger)
