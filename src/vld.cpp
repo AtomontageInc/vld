@@ -976,11 +976,11 @@ LPWSTR VisualLeakDetector::buildSymbolSearchPath ()
         delete [] env;
     }
 
-#if _MSC_VER > 1919
+#if _MSC_VER > 1933
 #error Not supported VS
 #endif
     // Append Visual Studio 2017/2015/2013/2012/2010/2008 symbols cache directory.
-    for (UINT n = 9; n <= 14; ++n) {
+    for (UINT n = 9; n <= 16; ++n) {
         WCHAR debuggerpath[MAX_PATH] = { 0 };
         swprintf(debuggerpath, _countof(debuggerpath), L"Software\\Microsoft\\VisualStudio\\%u.0\\Debugger", n);
         HKEY debuggerkey;
